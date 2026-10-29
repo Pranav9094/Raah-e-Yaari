@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FFF8E7">
+<title>Raah-e-Yaari — 22 Stop Road Trip</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--latte:#FFF8E7;--mocha:#B08968;--wine:#6D0F25;--ink:#2A0A12;--soft:rgba(42,10,18,.68);--line:rgba(176,137,104,.45);--shadow:0 16px 40px rgba(42,10,18,.13);--r:18px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--latte);color:var(--ink);font:14px/1.6 Inter,system-ui,sans-serif;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;background-image:radial-gradient(var(--mocha) .7px,transparent .7px);background-size:18px 18px;z-index:-1}
+h1,h2,h3{font-family:"Playfair Display",serif;line-height:1.1;margin:0}
+h1{font-size:clamp(3rem,12vw,7.4rem);letter-spacing:-.05em}
+h2{font-size:clamp(1.9rem,5vw,3.4rem)}
+h3{font-size:1.4rem}
+button{font:inherit;cursor:pointer;color:inherit;background:none;border:0}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1120px,calc(100% - 28px));margin:auto}
+.progress{position:fixed;top:0;left:0;height:3px;width:100%;background:var(--wine);transform:scaleX(0);transform-origin:left;z-index:99}
+
+/* NAV */
+.nav{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:40;width:min(1080px,calc(100% - 20px));display:flex;align-items:center;justify-content:space-between;padding:8px 10px 8px 18px;border:1px solid var(--line);border-radius:999px;background:color-mix(in srgb,var(--latte) 80%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 8px 25px rgba(42,10,18,.08)}
+.brand{font:800 1.02rem "Playfair Display";color:var(--wine)}
+.navr{display:flex;align-items:center;gap:14px}
+.navlink{display:none;font-size:.78rem;font-weight:700}
+.navlink:hover{color:var(--mocha)}
+.notes-btn{border:1px solid var(--wine);color:var(--wine);border-radius:999px;padding:7px 14px;min-height:38px;font-size:.78rem;font-weight:700;transition:.2s}
+.notes-btn:hover{background:var(--wine);color:var(--latte)}
+.wine-btn{display:inline-block;border-radius:999px;background:var(--wine);color:var(--latte);padding:12px 20px;min-height:44px;font-weight:700}
+
+/* HERO */
+.hero{min-height:100dvh;display:grid;place-items:center;position:relative;overflow:hidden;padding:100px 0 42px}
+.hero:after{content:"";position:absolute;inset:auto 0 0;height:32%;background:linear-gradient(transparent,var(--latte));z-index:0}
+.hero-copy{position:relative;z-index:2;text-align:center}
+.kicker{color:var(--wine);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:800}
+.hero h1{color:var(--wine);margin:14px 0 6px}
+.tagline{font:600 clamp(1.05rem,3vw,1.6rem) "Playfair Display";color:var(--mocha);margin:0}
+.sub{font-size:.82rem;margin:14px auto 22px;color:var(--soft)}
+.hero-art{position:absolute;inset:0;overflow:hidden;transform:translateY(var(--parallax,0px))}
+.sun{position:absolute;top:19%;right:13%;width:92px;height:92px;border:1px solid var(--mocha);border-radius:50%;box-shadow:0 0 0 18px rgba(176,137,104,.08),0 0 0 38px rgba(176,137,104,.06)}
+.range{position:absolute;bottom:22%;left:-5%;width:110%;height:34%;background:var(--mocha);clip-path:polygon(0 100%,0 72%,13% 48%,25% 72%,39% 20%,53% 62%,67% 31%,81% 70%,93% 43%,100% 65%,100% 100%);opacity:.28}
+.range.back{bottom:29%;opacity:.14;transform:scaleX(-1)}
+.temple{position:absolute;bottom:25%;right:15%;width:90px;height:75px;border:4px solid var(--wine);border-bottom:0;border-radius:48% 48% 0 0;opacity:.55}
+.temple:before{content:"";position:absolute;left:35px;top:-35px;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:34px solid var(--wine)}
+.road-art{position:absolute;bottom:-13%;left:30%;width:42%;height:72%;border:28px solid var(--mocha);border-bottom:0;border-radius:50% 50% 0 0;transform:rotate(22deg);opacity:.6}
+.road-art:after{content:"";position:absolute;left:10px;top:0;height:100%;border-left:3px dashed var(--wine)}
+.car3d{position:absolute;bottom:24%;left:14%;width:96px;height:28px;background:var(--wine);border-radius:14px 19px 6px 6px;transform:skew(-10deg) rotateY(-12deg);box-shadow:10px 10px 0 -3px rgba(42,10,18,.24);animation:idle 5s ease-in-out infinite}
+.car3d:before{content:"";position:absolute;left:20px;top:-18px;border:9px solid transparent;border-bottom:18px solid var(--wine);border-right-width:26px}
+.car3d:after{content:"••";letter-spacing:51px;position:absolute;left:13px;top:12px;font-size:23px;color:var(--latte)}
+@keyframes idle{50%{transform:skew(-10deg) rotateY(12deg) translateY(-4px)}}
+.hero-stats{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:min(640px,100%);margin:30px auto 0}
+.hero-stat{padding:12px 6px;border:1px solid var(--line);border-radius:14px;background:rgba(255,248,231,.85);box-shadow:var(--shadow)}
+.hero-stat b{display:block;color:var(--wine);font:700 clamp(1.3rem,4vw,2rem) "Playfair Display"}
+.hero-stat small{font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+
+/* SECTION */
+section{padding:62px 0}
+.head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:18px;flex-wrap:wrap}
+.head p{max-width:380px;margin:6px 0 0;font-size:.85rem;color:var(--soft)}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.summary div{border:1px solid var(--line);border-radius:14px;padding:10px 4px;text-align:center;background:rgba(255,248,231,.85)}
+.summary b{display:block;color:var(--wine);font:700 1.2rem "Playfair Display"}
+.summary small{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+
+/* CHIPS */
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 0 12px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;min-height:42px;border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:.78rem;font-weight:700;color:var(--wine);background:transparent;transition:.2s}
+.chip.on{background:var(--wine);color:var(--latte);border-color:var(--wine)}
+.ctrl{display:none;align-items:center;justify-content:space-between;margin:0 0 10px;color:var(--wine);font-size:.78rem;font-weight:700}
+.ctrl button{width:44px;height:44px;border:1px solid var(--line);border-radius:50%;background:var(--latte);color:var(--wine)}
+
+/* BOARD */
+.board-shell{border:1px solid var(--line);border-radius:var(--r);background:rgba(255,248,231,.7);box-shadow:var(--shadow);padding:22px}
+.board{position:relative;display:grid;grid-template-columns:repeat(var(--cols,6),minmax(0,1fr));gap:36px 32px}
+.board svg{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:0}
+.road-base{fill:none;stroke:var(--mocha);stroke-width:9;stroke-linecap:round;opacity:.35}
+.road-top{fill:none;stroke:var(--wine);stroke-width:3;stroke-linecap:round}
+.tile{position:relative;z-index:1;min-width:0;min-height:98px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center;padding:26px 8px 12px;background:var(--latte);border:1px solid var(--line);border-radius:16px;box-shadow:0 6px 14px rgba(42,10,18,.08);transition:transform .2s,box-shadow .2s,border-color .2s}
+.tile:hover,.tile:focus-visible,.tile.sel{transform:translateY(-4px);border-color:var(--wine);box-shadow:0 12px 24px rgba(109,15,37,.18);outline:none}
+.tile.cf{border-color:var(--mocha);box-shadow:0 0 0 2px var(--mocha),0 8px 18px rgba(176,137,104,.25)}
+.bn{position:absolute;top:8px;left:8px;width:24px;height:24px;border-radius:50%;background:var(--wine);color:var(--latte);font-size:.68rem;font-weight:700;display:grid;place-items:center}
+.nm{font-weight:700;font-size:.9rem;line-height:1.25}
+.lg{font-size:.72rem;color:var(--mocha);font-weight:600;line-height:1.25}
+.caption{display:flex;justify-content:space-between;gap:8px;margin:12px 2px 0;color:var(--mocha);font-size:.7rem;font-weight:700}
+
+/* STRIP */
+.strip{display:flex;gap:8px;overflow-x:auto;padding:14px 1px 4px;scrollbar-width:thin}
+.strip button{flex:none;min-height:42px;border:1px solid var(--line);border-radius:999px;background:var(--latte);color:var(--wine);padding:6px 13px;font-size:.74rem;font-weight:700}
+.strip button small{color:var(--mocha);margin-left:4px;font-size:.62rem}
+.strip button.on{background:var(--wine);color:var(--latte)}
+.strip button.on small{color:var(--latte)}
+
+/* HOVER PREVIEW */
+.pv{position:fixed;z-index:75;width:220px;padding:7px;background:var(--latte);border:1px solid var(--mocha);border-radius:14px;box-shadow:var(--shadow);pointer-events:none;opacity:0;transform:translateY(6px);transition:opacity .18s,transform .18s}
+.pv.on{opacity:1;transform:none}
+.pv .im{height:130px;border-radius:9px;background:var(--mocha);overflow:hidden}
+.pv img{width:100%;height:100%;object-fit:cover;display:block}
+.pv.failed img{visibility:hidden}
+.pv strong{display:block;margin-top:6px;font:700 .86rem "Playfair Display"}
+.pv small{display:block;font-size:.68rem;color:var(--soft)}
+
+/* MODAL / BOTTOM SHEET */
+.modal{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(42,10,18,.5);opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s}
+.modal.open{opacity:1;visibility:visible}
+.sheet{position:relative;width:min(480px,100%);max-height:88dvh;overflow:auto;background:var(--latte);border:1px solid var(--mocha);border-radius:20px;box-shadow:0 25px 80px rgba(42,10,18,.35);transform:translateY(14px);transition:transform .25s}
+.modal.open .sheet{transform:none}
+.x{position:absolute;top:10px;right:10px;z-index:3;width:42px;height:42px;border-radius:50%;background:rgba(255,248,231,.94);border:1px solid var(--line);color:var(--wine);font-size:1.4rem;line-height:1}
+.ph{aspect-ratio:16/9;background:var(--mocha);overflow:hidden}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.ph.failed img{visibility:hidden}
+.bd{padding:16px 20px calc(18px + env(safe-area-inset-bottom))}
+.bd small.k{color:var(--mocha);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.7rem}
+.bd h3{color:var(--wine);margin:2px 0 2px}
+.bd .state{font-size:.8rem;color:var(--soft)}
+.badges{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px}
+.badge{border-radius:999px;background:var(--mocha);color:var(--ink);padding:4px 11px;font-size:.72rem;font-weight:700}
+.badge.w{background:var(--wine);color:var(--latte)}
+.note{margin:10px 0 0;font-size:.8rem;color:var(--soft)}
+.spots{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.spots span{border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:.8rem;background:#fffcf3}
+.pn{display:flex;gap:10px;margin-top:18px}
+.pn button{flex:1;min-height:44px;border:1px solid var(--line);border-radius:12px;padding:8px 10px;font-size:.8rem;font-weight:600;color:var(--wine)}
+.pn button:hover:not(:disabled){border-color:var(--wine)}
+.pn button:disabled{opacity:.3;cursor:default}
+
+/* NOTES DRAWER */
+.drawer{position:fixed;inset:0;z-index:80;display:flex;align-items:flex-start;justify-content:center;padding:80px 14px 14px;background:rgba(42,10,18,.3);opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s}
+.drawer.open{opacity:1;visibility:visible}
+.panel{position:relative;width:min(500px,100%);max-height:80dvh;overflow:auto;background:var(--latte);border:1px solid var(--mocha);border-radius:16px;padding:18px}
+.panel h3{font-size:1.15rem;color:var(--wine);margin-bottom:10px}
+.nt{display:flex;gap:6px;border-bottom:1px solid var(--line)}
+.nt button{padding:8px 8px;font-size:.76rem;font-weight:700;color:var(--soft);border-bottom:2px solid transparent;min-height:40px}
+.nt button.on{color:var(--wine);border-color:var(--wine)}
+.nl{display:none;margin:12px 0 0;padding-left:18px;font-size:.82rem}
+.nl.on{display:block}
+.nl li{margin:7px 0}
+.nl label{display:flex;gap:9px;align-items:center;margin:8px 0;min-height:28px;cursor:pointer}
+.nl input{accent-color:var(--wine);width:18px;height:18px}
+.pk{font-size:.76rem;color:var(--soft);margin-top:10px}
+
+/* FOOTER */
+footer{text-align:center;padding:50px 0 90px;color:var(--wine)}
+footer h2{font-size:clamp(2rem,7vw,3.6rem);margin-bottom:12px}
+.top{position:fixed;right:16px;bottom:calc(18px + env(safe-area-inset-bottom));width:46px;height:46px;border-radius:50%;background:var(--wine);color:var(--latte);z-index:30;opacity:0;pointer-events:none;transition:.2s}
+.top.show{opacity:1;pointer-events:auto}
+
+/* RESPONSIVE */
+@media(min-width:700px){.navlink{display:inline}}
+@media(max-width:1050px){.board{gap:30px 24px}}
+@media(max-width:699px){
+ .board-shell{padding:12px}
+ .board{gap:26px 18px}
+ .tile{min-height:92px;padding:26px 6px 10px}
+ .nm{font-size:.84rem}
+ .lg{font-size:.68rem}
+ .ctrl{display:flex}
+ .summary b{font-size:1rem}
+ .chips{position:sticky;top:60px;z-index:8;background:var(--latte);padding:8px 0}
+ .pv{display:none}
+ .modal{align-items:flex-end;padding:0}
+ .sheet{width:100%;max-height:86dvh;border-radius:20px 20px 0 0;transform:translateY(40px)}
+ .drawer{align-items:flex-end;padding:0}
+ .panel{border-radius:16px 16px 0 0;max-height:78dvh}
+}
+@media(max-width:380px){.board{gap:22px 14px}.hero-stat small{font-size:.6rem}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<nav class="nav" aria-label="Main navigation">
+  <a href="#top" class="brand">Raah-e-Yaari</a>
+  <div class="navr"><a class="navlink" href="#world">Route</a><button class="notes-btn" data-open-notes>Trip Notes</button></div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-art" id="heroArt" aria-hidden="true"><div class="sun"></div><div class="range"></div><div class="range back"></div><div class="temple"></div><div class="road-art"></div><div class="car3d"></div></div>
+  <div class="hero-copy wrap">
+    <div class="kicker">Suzuki Ertiga · 7 childhood friends</div>
+    <h1>Raah-e-Yaari</h1>
+    <p class="tagline">1 Gaadi 7 Yaar Full Dhamal</p>
+    <p class="sub">Parul University → 22 stops → Parul University | Starts 10 Jan</p>
+    <a class="wine-btn" href="#world">Enter the route</a>
+    <div class="hero-stats">
+      <div class="hero-stat"><b data-counter id="hKm">0</b><small>Total KM</small></div>
+      <div class="hero-stat"><b data-counter id="hHr">0</b><small>Drive Hours</small></div>
+      <div class="hero-stat"><b data-counter id="hSt">0</b><small>Stops</small></div>
+    </div>
+  </div>
+</header>
+
+<main>
+<section id="world"><div class="wrap">
+  <div class="head reveal"><div><div class="kicker">The route</div><h2>One road. Twenty-two stops.</h2></div><p>Tap any stop for details. On desktop, hover a stop for a quick photo.</p></div>
+  <div class="summary reveal">
+    <div><b id="sKm">0</b><small>Total KM</small></div>
+    <div><b id="sHr">0</b><small>Drive hours</small></div>
+    <div><b id="sSt">0</b><small>Stops</small></div>
+    <div><b id="sSa">0</b><small>States</small></div>
+  </div>
+  <div class="chips" id="chips" role="group" aria-label="Chapters"></div>
+  <div class="ctrl" id="ctrl"><button id="cPrev" aria-label="Previous chapter">←</button><span id="cLabel"></span><button id="cNext" aria-label="Next chapter">→</button></div>
+  <div class="board-shell reveal" id="shell">
+    <div class="board" id="board"><svg id="road" aria-hidden="true"><path class="road-base" id="rb"></path><path class="road-top" id="rt"></path></svg></div>
+    <div class="caption"><span>Tap a stop to open details</span><span id="hint"></span></div>
+  </div>
+  <div class="strip" id="strip" aria-label="Stop selector"></div>
+</div></section>
+</main>
+
+<footer>
+  <h2>Happy Journey</h2>
+  <button class="notes-btn" data-open-notes>Trip Notes</button>
+</footer>
+<button class="top" id="topBtn" aria-label="Back to top">↑</button>
+
+<!-- hover preview (desktop) -->
+<div class="pv" id="pv" aria-hidden="true"><div class="im"><img id="pvImg" alt=""></div><strong id="pvName"></strong><small id="pvMeta"></small></div>
+
+<!-- stop panel -->
+<div class="modal" id="modal" aria-hidden="true">
+  <article class="sheet" role="dialog" aria-modal="true" aria-labelledby="dName">
+    <button class="x" id="dClose" aria-label="Close">&times;</button>
+    <div class="ph" id="dPh"><img id="dImg" alt=""></div>
+    <div class="bd">
+      <small class="k" id="dStop"></small>
+      <h3 id="dName"></h3>
+      <div class="state" id="dState"></div>
+      <div class="badges" id="dBadges"></div>
+      <p class="note" id="dNote" hidden></p>
+      <div class="spots" id="dSpots"></div>
+      <div class="pn"><button id="dPrev"></button><button id="dNext"></button></div>
+    </div>
+  </article>
+</div>
+
+<!-- trip notes -->
+<div class="drawer" id="drawer" aria-hidden="true">
+  <div class="panel" role="dialog" aria-modal="true" aria-label="Trip notes">
+    <button class="x" id="nClose" aria-label="Close">&times;</button>
+    <h3>Trip Notes</h3>
+    <div class="nt" id="nt">
+      <button class="on" data-t="booking">Pre-Booking</button>
+      <button data-t="safety">Winter Safety</button>
+      <button data-t="packing">Packing List</button>
+    </div>
+    <ul class="nl on" id="n-booking">
+      <li>Ujjain Mahakal Bhasma Aarti booking</li>
+      <li>Ayodhya Ram Mandir darshan slot</li>
+      <li>Other small-place passes</li>
+    </ul>
+    <ul class="nl" id="n-safety">
+      <li>Snow chains: practise fitting once before leaving</li>
+      <li>Avoid night driving in Rajasthan, UP and Delhi (dense fog)</li>
+      <li>Black ice on hill roads: go slow, no sudden braking</li>
+      <li>Full car service and spare tyre check</li>
+      <li>Rotate the 4 drivers</li>
+      <li>Carry ID, DL, RC, insurance, PUC</li>
+      <li>FASTag pass is valid only on NH / expressways, keep Rs 2,000-3,000 for other tolls</li>
+    </ul>
+    <div class="nl" id="n-packing">
+      <label><input type="checkbox" data-pack="thermals"> Thermals and warm layers</label>
+      <label><input type="checkbox" data-pack="gloves"> Gloves, cap, muffler</label>
+      <label><input type="checkbox" data-pack="chains"> Snow chains</label>
+      <label><input type="checkbox" data-pack="firstaid"> First-aid and medicines</label>
+      <label><input type="checkbox" data-pack="docs"> ID, DL, RC, insurance, PUC</label>
+      <label><input type="checkbox" data-pack="chargers"> Chargers and power bank</label>
+      <label><input type="checkbox" data-pack="maps"> Offline maps</label>
+      <label><input type="checkbox" data-pack="tools"> Jump cables, tow rope, torch</label>
+      <p class="pk" id="pk"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =====================  EDIT HERE  =====================
+   Images: put files in an "images" folder next to index.html.
+   Each stop uses  images/<img>.png   (change <img> below to rename).
+   n = name, st = state, km = km from previous stop, min = drive minutes */
+const CONFIG={imgDir:'images/',imgExt:'.jpg'};
+const TRIP=[
+ {n:'Parul University',st:'Gujarat',km:0,min:0,img:'parul-university',spots:['Parul University, Vadodara']},
+ {n:'Udaipur',st:'Rajasthan',km:340,min:360,img:'udaipur',spots:['City Palace','Lake Pichola','Jag Mandir']},
+ {n:'Jaipur',st:'Rajasthan',km:400,min:420,img:'jaipur',spots:['Hawa Mahal','Amber Fort','Jantar Mantar']},
+ {n:'Khatu Shyam',st:'Rajasthan',km:80,min:105,img:'khatu-shyam',spots:['Khatu Shyam Ji Temple','Shyam Kund']},
+ {n:'Agra',st:'Uttar Pradesh',km:250,min:270,img:'agra',spots:['Taj Mahal','Agra Fort','Mehtab Bagh']},
+ {n:'Mathura / Vrindavan',st:'Uttar Pradesh',km:60,min:75,img:'mathura-vrindavan',spots:['Krishna Janmabhoomi','Banke Bihari Temple','Prem Mandir']},
+ {n:'Delhi',st:'Delhi',km:180,min:210,img:'delhi',spots:['India Gate','Red Fort','Akshardham']},
+ {n:'Manali',st:'Himachal Pradesh',km:540,min:720,img:'manali',spots:['Hadimba Temple','Solang Valley','Atal Tunnel']},
+ {n:'Shimla',st:'Himachal Pradesh',km:250,min:420,img:'shimla',spots:['The Ridge','Mall Road','Jakhoo Temple']},
+ {n:'Mussoorie',st:'Uttarakhand',km:350,min:540,img:'mussoorie',spots:['Mall Road','Kempty Falls','Gun Hill']},
+ {n:'Rishikesh',st:'Uttarakhand',km:90,min:150,img:'rishikesh',spots:['Laxman Jhula','Ram Jhula','Triveni Ghat Aarti']},
+ {n:'Devprayag',st:'Uttarakhand',km:75,min:120,img:'devprayag',spots:['Sangam Point','Raghunath Temple']},
+ {n:'Dhari Devi Temple',st:'Uttarakhand',km:55,min:90,img:'dhari-devi',spots:['Dhari Devi Temple','Alaknanda Riverfront']},
+ {n:'Kartik Swami Temple',st:'Uttarakhand',km:40,min:90,img:'kartik-swami',spots:['Kartik Swami Temple','Kanakchauri Himalayan view']},
+ {n:'Kainchi Dham',st:'Uttarakhand',km:200,min:420,img:'kainchi-dham',spots:['Neem Karoli Baba Ashram','Hanuman Temple']},
+ {n:'Bhimtal',st:'Uttarakhand',km:20,min:40,img:'bhimtal',spots:['Bhimtal Lake','Bhimeshwar Mahadev Temple']},
+ {n:'Nainital',st:'Uttarakhand',km:22,min:45,img:'nainital',spots:['Naini Lake','Naina Devi Temple','Mall Road']},
+ {n:'Ayodhya',st:'Uttar Pradesh',km:500,min:600,img:'ayodhya',spots:['Ram Mandir','Hanuman Garhi','Saryu Ghat']},
+ {n:'Varanasi',st:'Uttar Pradesh',km:200,min:270,img:'varanasi',spots:['Kashi Vishwanath','Ganga Aarti','Sarnath']},
+ {n:'Ujjain',st:'Madhya Pradesh',km:950,min:1080,img:'ujjain',spots:['Mahakaleshwar Temple','Ram Ghat','Kal Bhairav Temple'],note:'Long leg: split it with one night halt on the way.'},
+ {n:'Omkareshwar',st:'Madhya Pradesh',km:140,min:180,img:'omkareshwar',spots:['Omkareshwar Jyotirlinga','Mamleshwar Temple','Narmada Ghat']},
+ {n:'Parul University (Return)',st:'Gujarat',km:330,min:360,img:'parul-university',spots:['Back to Vadodara']}
+];
+/* chapters: s = first stop index, e = last stop index + 1 (0-based) */
+const CH=[{n:'Rajasthan',s:0,e:4},{n:'Braj & Delhi',s:4,e:7},{n:'Himachal',s:7,e:9},{n:'Uttarakhand',s:9,e:17},{n:'Pilgrim Belt',s:17,e:22}];
+/* ======================================================= */
+
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const hoverOk=matchMedia('(hover:hover) and (pointer:fine)');
+const isMobile=()=>innerWidth<700;
+const fmt=m=>{if(!m)return'Start';const h=Math.floor(m/60),r=m%60;return'~'+[h?h+' hr':'',r?r+' min':''].filter(Boolean).join(' ')};
+const leg=s=>s.km?s.km+' km | '+fmt(s.min):'Start';
+const src=s=>CONFIG.imgDir+s.img+CONFIG.imgExt;
+const chapterOf=i=>CH.findIndex(c=>i>=c.s&&i<c.e);
+
+let selected=-1,chap=0,focusCh=-1,lastFocus=null;
+const board=$('#board'),modal=$('#modal'),drawer=$('#drawer'),pv=$('#pv');
+
+/* ---------- stats (calculated from data) ---------- */
+const totKm=TRIP.reduce((a,s)=>a+s.km,0);
+const totHr=Math.round(TRIP.reduce((a,s)=>a+s.min,0)/60);
+const nStates=new Set(TRIP.map(s=>s.st)).size;
+const fmtN=v=>v.toLocaleString('en-IN');
+[['sKm',totKm],['sHr',totHr],['sSt',TRIP.length],['sSa',nStates]].forEach(([id,v])=>$('#'+id).textContent=fmtN(v));
+function count(el,end){
+  if(reduce){el.textContent=fmtN(end);return}
+  const t0=performance.now();
+  (function f(t){const p=Math.min(1,(t-t0)/1000);el.textContent=fmtN(Math.floor(end*(1-Math.pow(1-p,3))));if(p<1)requestAnimationFrame(f);else el.textContent=fmtN(end)})(t0);
+}
+[['hKm',totKm],['hHr',totHr],['hSt',TRIP.length]].forEach(([id,v])=>count($('#'+id),v));
+
+/* ---------- board ---------- */
+function cols(){return isMobile()?2:innerWidth>=1051?6:4}
+function renderBoard(){
+  const c=cols(),range=isMobile()?CH[chap]:{s:0,e:TRIP.length};
+  board.style.setProperty('--cols',c);
+  board.querySelectorAll('.tile').forEach(t=>t.remove());
+  TRIP.slice(range.s,range.e).forEach((s,local)=>{
+    const gi=range.s+local,row=Math.floor(local/c),idx=local%c,rev=row%2===1;
+    const t=document.createElement('button');
+    t.className='tile';t.dataset.i=gi;
+    t.style.gridColumn=rev?c-idx:idx+1;t.style.gridRow=row+1;
+    t.setAttribute('aria-label','Stop '+(gi+1)+', '+s.n+', '+leg(s));
+    t.innerHTML='<span class="bn">'+(gi+1)+'</span><span class="nm">'+s.n+'</span><span class="lg">'+leg(s)+'</span>';
+    board.appendChild(t);
+  });
+  applyMarks();renderChips();
+  $('#hint').textContent=isMobile()?(range.e-range.s)+' stops':'Snake route · '+c+' columns';
+  $('#cLabel').textContent='Chapter '+(chap+1)+' of '+CH.length+' · '+CH[chap].n;
+  requestAnimationFrame(drawRoad);
+}
+function applyMarks(){
+  $$('.tile').forEach(t=>{
+    const i=+t.dataset.i;
+    t.classList.toggle('sel',i===selected);
+    t.classList.toggle('cf',!isMobile()&&focusCh>=0&&i>=CH[focusCh].s&&i<CH[focusCh].e);
+  });
+  $$('#strip button').forEach(b=>b.classList.toggle('on',+b.dataset.i===selected));
+}
+function drawRoad(){
+  const tiles=$$('.tile'),svg=$('#road'),rb=$('#rb'),rt=$('#rt');
+  svg.setAttribute('viewBox','0 0 '+board.clientWidth+' '+board.clientHeight);
+  let d='';
+  for(let i=1;i<tiles.length;i++){
+    const a=tiles[i-1],b=tiles[i];
+    if(a.offsetTop===b.offsetTop){
+      const fwd=b.offsetLeft>a.offsetLeft,y=a.offsetTop+a.offsetHeight/2;
+      d+='M'+(fwd?a.offsetLeft+a.offsetWidth:a.offsetLeft)+' '+y+'H'+(fwd?b.offsetLeft:b.offsetLeft+b.offsetWidth);
+    }else{
+      d+='M'+(a.offsetLeft+a.offsetWidth/2)+' '+(a.offsetTop+a.offsetHeight)+'V'+b.offsetTop;
+    }
+  }
+  rb.setAttribute('d',d);rt.setAttribute('d',d);
+  if(!d||reduce){rt.style.strokeDasharray='';rt.style.strokeDashoffset='';return}
+  const L=rt.getTotalLength();
+  rt.style.transition='none';rt.style.strokeDasharray=L;rt.style.strokeDashoffset=L;
+  rt.getBoundingClientRect();
+  rt.style.transition='stroke-dashoffset 1.4s ease';rt.style.strokeDashoffset=0;
+}
+
+/* ---------- chips ---------- */
+function renderChips(){
+  const box=$('#chips'),mob=isMobile();
+  const names=mob?CH.map(c=>c.n):['All',...CH.map(c=>c.n)];
+  box.innerHTML='';
+  names.forEach((n,k)=>{
+    const b=document.createElement('button');
+    b.className='chip'+((mob?k===chap:k===focusCh+1)?' on':'');
+    b.textContent=mob?(k+1)+'. '+n:n;
+    b.onclick=()=>{
+      if(mob){chap=k;renderBoard();return}
+      focusCh=(k-1===focusCh)?-1:k-1;
+      applyMarks();renderChips();
+      if(focusCh>=0){const t=board.querySelector('[data-i="'+CH[focusCh].s+'"]');t&&t.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'})}
+    };
+    box.appendChild(b);
+  });
+}
+function changeChapter(d){chap=(chap+d+CH.length)%CH.length;renderBoard()}
+$('#cPrev').onclick=()=>changeChapter(-1);
+$('#cNext').onclick=()=>changeChapter(1);
+let tx=0,ty=0;
+$('#shell').addEventListener('touchstart',e=>{tx=e.changedTouches[0].clientX;ty=e.changedTouches[0].clientY},{passive:true});
+$('#shell').addEventListener('touchend',e=>{
+  if(!isMobile())return;
+  const dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;
+  if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5)changeChapter(dx<0?1:-1);
+},{passive:true});
+
+/* ---------- strip ---------- */
+$('#strip').innerHTML=TRIP.map((s,i)=>'<button data-i="'+i+'">'+(i+1)+' '+s.n+(s.km?'<small>'+s.km+' km</small>':'')+'</button>').join('');
+$('#strip').onclick=e=>{const b=e.target.closest('button');if(b)openDetail(+b.dataset.i)};
+
+/* ---------- hover preview (desktop) ---------- */
+const pvImg=$('#pvImg');
+pvImg.onerror=()=>pv.classList.add('failed');
+board.addEventListener('mouseover',e=>{
+  if(!hoverOk.matches||isMobile())return;
+  const t=e.target.closest('.tile');if(!t||t.contains(e.relatedTarget))return;
+  const s=TRIP[+t.dataset.i];
+  pv.classList.remove('failed');pvImg.src=src(s);pvImg.alt=s.n;
+  $('#pvName').textContent=s.n;$('#pvMeta').textContent=s.st+' · '+leg(s);
+  const r=t.getBoundingClientRect(),h=196;
+  const left=Math.min(Math.max(r.left+r.width/2-110,8),innerWidth-228);
+  let top=r.top-h-10;if(top<70)top=r.bottom+10;
+  pv.style.left=left+'px';pv.style.top=top+'px';pv.classList.add('on');
+});
+board.addEventListener('mouseout',e=>{
+  const t=e.target.closest('.tile');if(!t||t.contains(e.relatedTarget))return;
+  pv.classList.remove('on');
+});
+
+/* ---------- overlays ---------- */
+function openOv(el,focusSel){
+  lastFocus=document.activeElement;pv.classList.remove('on');
+  el.classList.add('open');el.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+  setTimeout(()=>{const f=el.querySelector(focusSel);f&&f.focus()},60);
+}
+function closeOv(el){
+  el.classList.remove('open');el.setAttribute('aria-hidden','true');
+  if(!$('.modal.open,.drawer.open'))document.body.style.overflow='';
+  if(lastFocus&&document.contains(lastFocus)&&lastFocus.focus)lastFocus.focus();
+}
+
+/* ---------- stop panel ---------- */
+const dImg=$('#dImg');
+dImg.onerror=()=>$('#dPh').classList.add('failed');
+function fillDetail(i){
+  selected=i;const s=TRIP[i];
+  $('#dStop').textContent='Stop '+(i+1)+' of '+TRIP.length;
+  $('#dName').textContent=s.n;$('#dState').textContent=s.st;
+  $('#dBadges').innerHTML=i===0?'<span class="badge w">Start point</span>':'<span class="badge">'+s.km+' km from '+TRIP[i-1].n+'</span><span class="badge w">'+fmt(s.min)+'</span>';
+  const nt=$('#dNote');nt.textContent=s.note||'';nt.hidden=!s.note;
+  $('#dPh').classList.remove('failed');dImg.src=src(s);dImg.alt=s.n;
+  $('#dSpots').innerHTML=s.spots.map(x=>'<span>'+x+'</span>').join('');
+  const p=$('#dPrev'),n=$('#dNext');
+  p.textContent=i>0?'← '+TRIP[i-1].n:'';p.disabled=i===0;p.style.visibility=i===0?'hidden':'visible';
+  n.textContent=i<TRIP.length-1?TRIP[i+1].n+' →':'';n.disabled=i===TRIP.length-1;n.style.visibility=i===TRIP.length-1?'hidden':'visible';
+  if(isMobile()&&chapterOf(i)!==chap){chap=chapterOf(i);renderBoard()}else applyMarks();
+  const chip=$('#strip button[data-i="'+i+'"]');
+  chip&&chip.scrollIntoView({behavior:reduce?'auto':'smooth',block:'nearest',inline:'center'});
+}
+function openDetail(i){fillDetail(i);openOv(modal,'#dClose')}
+board.addEventListener('click',e=>{const t=e.target.closest('.tile');if(t)openDetail(+t.dataset.i)});
+board.addEventListener('keydown',e=>{
+  const t=e.target.closest('.tile');if(!t)return;
+  const all=$$('.tile'),k=all.indexOf(t);
+  if(['ArrowRight','ArrowDown'].includes(e.key)){e.preventDefault();(all[k+1]||t).focus()}
+  if(['ArrowLeft','ArrowUp'].includes(e.key)){e.preventDefault();(all[k-1]||t).focus()}
+});
+$('#dPrev').onclick=()=>selected>0&&fillDetail(selected-1);
+$('#dNext').onclick=()=>selected<TRIP.length-1&&fillDetail(selected+1);
+$('#dClose').onclick=()=>closeOv(modal);
+modal.addEventListener('click',e=>{if(e.target===modal)closeOv(modal)});
+
+/* ---------- trip notes ---------- */
+$$('[data-open-notes]').forEach(b=>b.onclick=()=>openOv(drawer,'#nClose'));
+$('#nClose').onclick=()=>closeOv(drawer);
+drawer.addEventListener('click',e=>{if(e.target===drawer)closeOv(drawer)});
+$('#nt').onclick=e=>{
+  const b=e.target.closest('button');if(!b)return;
+  $$('#nt button').forEach(x=>x.classList.toggle('on',x===b));
+  $$('.nl').forEach(x=>x.classList.toggle('on',x.id==='n-'+b.dataset.t));
+};
+const packs=$$('[data-pack]');
+const store={get(k){try{return localStorage.getItem('ry-'+k)==='1'}catch(e){return false}},set(k,v){try{localStorage.setItem('ry-'+k,v?'1':'0')}catch(e){}}};
+function packCount(){$('#pk').textContent=packs.filter(x=>x.checked).length+' / '+packs.length+' packed'}
+packs.forEach(x=>{x.checked=store.get(x.dataset.pack);x.onchange=()=>{store.set(x.dataset.pack,x.checked);packCount()}});
+packCount();
+
+/* ---------- keyboard ---------- */
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){drawer.classList.contains('open')?closeOv(drawer):modal.classList.contains('open')&&closeOv(modal)}
+  if(modal.classList.contains('open')&&!drawer.classList.contains('open')){
+    if(e.key==='ArrowRight'&&selected<TRIP.length-1)fillDetail(selected+1);
+    if(e.key==='ArrowLeft'&&selected>0)fillDetail(selected-1);
+  }
+});
+
+/* ---------- scroll, reveal, resize ---------- */
+addEventListener('scroll',()=>{
+  const max=document.documentElement.scrollHeight-innerHeight;
+  $('#progress').style.transform='scaleX('+(max>0?scrollY/max:0)+')';
+  $('#topBtn').classList.toggle('show',scrollY>500);
+  $('#heroArt').style.setProperty('--parallax',Math.min(70,scrollY*.12)+'px');
+  pv.classList.remove('on');
+},{passive:true});
+$('#topBtn').onclick=()=>scrollTo({top:0,behavior:reduce?'auto':'smooth'});
+if('IntersectionObserver' in window){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
+  $$('.reveal').forEach(x=>io.observe(x));
+}else $$('.reveal').forEach(x=>x.classList.add('in'));
+let rt0,lastMode=isMobile(),lastCols=cols();
+addEventListener('resize',()=>{
+  clearTimeout(rt0);
+  rt0=setTimeout(()=>{
+    if(isMobile()!==lastMode||cols()!==lastCols){lastMode=isMobile();lastCols=cols();renderBoard()}
+    else drawRoad();
+  },150);
+});
+
+renderBoard();
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(drawRoad);
+</script>
+</body>
+</html>
